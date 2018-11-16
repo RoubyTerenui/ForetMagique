@@ -17,7 +17,14 @@ public class Box {
         this.rift = rift;
     }
 
-    public Boolean getWind(){ return wind; }
+    public Box clone() {
+    	Box clone= new Box(this.wind,this.smell,this.light,this.monster,this.rift);
+		return clone;
+    }
+    
+    public Boolean getWind(){ 
+    	return wind;
+    }
 
     public void setWind(Boolean w){
         this.wind = w;

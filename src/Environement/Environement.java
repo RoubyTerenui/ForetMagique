@@ -2,6 +2,8 @@ package Environement;
 
 import java.util.ArrayList;
 
+import Environement.Box;
+
 public class Environement {
 
     private int taille;
@@ -11,9 +13,23 @@ public class Environement {
     public Environement(){
         this.taille = 3;
         this.grid = new ArrayList<Box>();
+        for (int i = 0; i <this.taille; i++) {
+			for (int j = 0; j < this.taille; j++) {
+				grid.set(i*this.taille+j,new Box(false,false,false,false,false));
+			}
+		}
+      //TODO rajouter la génération aléatoire
         this.perfMeasure = 0;
     }
 
+    public void resetEnvironementGrid() {
+    	for (int i = 0; i <this.taille; i++) {
+			for (int j = 0; j < this.taille; j++) {
+				grid.set(i*this.taille+j,new Box(false,false,false,false,false));
+			}
+		}
+    	//TODO rajouter la génération aléatoire
+    }
     public int getTaille(){
         return taille;
     }

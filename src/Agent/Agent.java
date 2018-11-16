@@ -1,34 +1,58 @@
 package Agent;
 
+import Environement.Box;
+import Environement.Environement;
+import InferenceEngine.Facts;
+import InferenceEngine.InferenceManager;
+
 public class Agent {
 
-    public Agent(BDI bdi, int positionY, int positionX, int nbrRockUsed, Sensors s) {
-        this.bdi = bdi;
-        this.positionY = positionY;
-        this.positionX = positionX;
-        this.nbrRockUsed = nbrRockUsed;
-        this.s = s;
-    }
-
+    
     private BDI bdi;
     private int positionY;
     private int positionX;
     private int nbrRockUsed;
     private Sensors sensor;
+    private Effectors effectors;
+	private InferenceManager inferenceEngine;
 
-    public void observe() {
-        this.sensor.
+    
+    public Agent(int positionY, int positionX, int nbrRockUsed) {
+        this.bdi = new BDI(3);
+        this.positionY = positionY;
+        this.positionX = positionX;
+        this.nbrRockUsed = nbrRockUsed;
+        this.sensor = new Sensors();
+        this.effectors = new Effectors();
+        this.inferenceEngine=new InferenceManager();
     }
 
+    public void updateInternState(Environement environment) {
+        Box observedBox = this.sensor.obserActualBox(this, environment);
+        this.getBdi().getBelief().set(this.getPositionY()*environment.getTaille()+this.getPositionX(),observedBox);
+        this.getInferenceEngine().getListOfFacts().add(new Facts(false, true, false, observedBox.getSmell(), observedBox.getWind(),observedBox.getLight(),observedBox.getMonster(),observedBox.getRift(),false));
+    }
+
+ // --- GETTERS AND SETTERS ---
+    
+    public Effectors getEffectors() {
+		return effectors;
+	}
+
+	public InferenceManager getInferenceEngine() {
+		return inferenceEngine;
+	}
+
+	
     public BDI getBdi(){
         return bdi;
     }
+      
+    public void setBdi(BDI bdi) {
+		this.bdi = bdi;
+	}
 
-    public void setBelief(BDI b){
-        this.bdi = b;
-    }
-
-    public int getPositionY(){
+	public int getPositionY(){
         return positionY;
     }
 
@@ -51,4 +75,9 @@ public class Agent {
     public void setNbrRockUsed(int n){
         this.nbrRockUsed = n;
     }
+
+	public Sensors getSensor() {
+		return sensor;
+	}
+
 }

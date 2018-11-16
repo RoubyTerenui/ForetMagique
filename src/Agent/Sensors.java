@@ -1,6 +1,7 @@
 package Agent;
 
 import Environement.Box;
+import Environement.Environement;
 
 public class Sensors {
 
@@ -8,21 +9,9 @@ public class Sensors {
     {
     }
 
-    public Boolean Is_Light(Box box)
-    {
-        Boolean light = box.getLight();
-        return light;
-    }
-
-    public Boolean Is_Wind(Box box)
-    {
-        Boolean wind = box.getWind();
-        return wind;
-    }
-
-    public Boolean Is_Smelling(Box box)
-    {
-        Boolean smell = box.getSmell();
-        return smell;
+    public Box obserActualBox(Agent agent,Environement environment) {
+		Box box=environment.getGrid().get(agent.getPositionY()*environment.getTaille()+agent.getPositionX()).clone();
+		return box ;
+    
     }
 }
