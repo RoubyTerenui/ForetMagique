@@ -17,9 +17,7 @@ public class Box {
         this.rift = rift;
     }
 
-    public Boolean getWind(){
-        return wind;
-    }
+    public Boolean getWind(){ return wind; }
 
     public void setWind(Boolean w){
         this.wind = w;

@@ -1,10 +1,24 @@
 package Agent;
 
 public class Agent {
+
+    public Agent(BDI bdi, int positionY, int positionX, int nbrRockUsed, Sensors s) {
+        this.bdi = bdi;
+        this.positionY = positionY;
+        this.positionX = positionX;
+        this.nbrRockUsed = nbrRockUsed;
+        this.s = s;
+    }
+
     private BDI bdi;
     private int positionY;
     private int positionX;
     private int nbrRockUsed;
+    private Sensors sensor;
+
+    public void observe() {
+        this.sensor.
+    }
 
     public BDI getBdi(){
         return bdi;

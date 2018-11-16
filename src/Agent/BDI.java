@@ -1,23 +1,29 @@
 package Agent;
 
-import com.sun.tools.doclint.Env;
+import java.util.ArrayList;
+import Environement.Box;
+import InferenceEngine.Facts;
 
 public class BDI {
-    private Environement belief;
+    private int taille;
+    private ArrayList<Box> belief;
+    private ArrayList<Facts> facts;
     private String intentions;
 
     public BDI()
     {
-        this.belief = null ;
+        this.taille = 3;
+        this.belief = new ArrayList<Box>();
+        this.facts = new ArrayList<Facts>();
         this.intentions = "Ne rien faire" ;
 
     }
 
-    public Environement getBelief(){
+    public ArrayList<Box>  getBelief(){
         return belief;
     }
 
-    public void setBelief(Environement b){
+    public void setBelief(ArrayList<Box>  b){
         this.belief = b;
     }
 
