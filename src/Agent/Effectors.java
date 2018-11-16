@@ -14,6 +14,7 @@ public class Effectors {
             {
                 positionY--;
             }
+            environment.setPerfMeasure(environment.getPerfMeasure()-1);
             agent.setPositionY(positionY);
         }
         public void MoveDown( Agent agent, Environement environment )
@@ -23,6 +24,7 @@ public class Effectors {
             {
                 positionY++;
             }
+            environment.setPerfMeasure(environment.getPerfMeasure()-1);
             agent.setPositionY(positionY);
         }
         public void MoveRight( Agent agent, Environement environment)
@@ -32,6 +34,7 @@ public class Effectors {
             {
                 positionX++;
             }
+            environment.setPerfMeasure(environment.getPerfMeasure()-1);
             agent.setPositionX(positionX);
         }
         public void MoveLeft( Agent agent, Environement environment)
@@ -41,6 +44,7 @@ public class Effectors {
             {
                 positionX -= 1;
             }
+            environment.setPerfMeasure(environment.getPerfMeasure()-1);
             agent.setPositionX(positionX);
         }
 
@@ -50,6 +54,7 @@ public class Effectors {
 	            int nbr = agent.getNbrRockUsed();
 	            nbr += 1;
 	            agent.setNbrRockUsed(nbr);
+	            environment.setPerfMeasure(environment.getPerfMeasure()-10);
 	            if((agent.getPositionX()+dirX)>0 && (agent.getPositionX()+dirX)<environment.getTaille()) {
 	            	if((agent.getPositionX()+dirX)>0 && (agent.getPositionX()+dirX)<environment.getTaille()) {
 		            	Box temp=environment.getGrid().get((agent.getPositionY()+dirY)*environment.getTaille()+(agent.getPositionX()+dirX)).clone();
@@ -62,7 +67,7 @@ public class Effectors {
         	}
         }
 
-        public void Sortir(Agent agent, Environement environment)
+        public void sortir(Agent agent, Environement environment)
         {
             agent.setPositionX(0);
             agent.setPositionY(0);
@@ -71,5 +76,14 @@ public class Effectors {
             //Change l'environment
             environment.setTaille(agent.getBdi().getTaille()+1);
             environment.resetEnvironementGrid();
+            
+            environment.setPerfMeasure(environment.getPerfMeasure()+10 * environment.getTaille());
+        }
+        
+        public void mourir(Agent agent,Environement environment) {
+        	agent.setPositionX(0);
+            agent.setPositionY(0);
+            environment.setPerfMeasure(environment.getPerfMeasure()-10 * environment.getTaille());
+        	
         }
 }

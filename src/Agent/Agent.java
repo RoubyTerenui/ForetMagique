@@ -24,7 +24,7 @@ public class Agent {
         this.nbrRockUsed = nbrRockUsed;
         this.sensor = new Sensors();
         this.effectors = new Effectors();
-        this.inferenceEngine=new InferenceManager();
+        this.inferenceEngine=new InferenceManager(this);
     }
 
     public void updateInternState(Environement environment) {
