@@ -12,13 +12,13 @@ public class UI extends JFrame implements Runnable {
     private Agent Test_Agent;
     private JFrame Terrain;
     private Environement environment;
-    private JPanel GrillePan = new JPanel(new GridLayout(10, 10));
+    private JPanel GrillePan;
     int h = 0;
 
     // Process
-    public void run() {
-        while (true) {
-            try {
+    public void run(){
+        while(true){
+            try{
                 Thread.sleep(10);
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -30,7 +30,7 @@ public class UI extends JFrame implements Runnable {
     // Constructor
     public UI(Agent Test_Agent, Environement environment) {
         Terrain = new JFrame();
-        GrillePan = new JPanel(new GridLayout(10, 10));
+        GrillePan = new JPanel(new GridLayout(3, 3));
         for (int i = 0; i < 100; i++) {
             JPanel Content = new JPanel();
             Content.setBorder(Line);

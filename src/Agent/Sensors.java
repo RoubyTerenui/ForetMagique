@@ -9,8 +9,8 @@ public class Sensors {
     {
     }
 
-    public Box obserActualBox(Agent agent,Environement environment) {
-		Box box=environment.getGrid().get(agent.getPositionY()*environment.getTaille()+agent.getPositionX()).clone();
+    public Box obserActualBox(Agent agent, Environement environment) {
+		Box box = environment.getGrid().get(agent.getPositionY()*environment.getTaille()+agent.getPositionX()).clone();
 		return box ;
     
     }

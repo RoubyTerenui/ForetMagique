@@ -25,7 +25,7 @@ public class Environement {
     public void resetEnvironementGrid() {
     	for (int i = 0; i <this.taille; i++) {
 			for (int j = 0; j < this.taille; j++) {
-				grid.set(i*this.taille+j,new Box(false,false,false,false,false));
+				grid.set(i*this.taille+j, new Box(false,false,false,false,false));
 			}
 		}
     	this.randomGeneration();
@@ -33,7 +33,7 @@ public class Environement {
     public void generatePortal() {
     	int posX=(int) Math.floor(Math.random()*this.taille);
     	int posY=(int)Math.floor(Math.random()*this.taille);
-    	while(grid.get(posX*this.taille+posY).getRift()==true) {
+    	while(grid.get(posX*this.taille+posY).getRift()) {
     		posX=(int) Math.floor(Math.random()*this.taille);
     		posY=(int)Math.floor(Math.random()*this.taille);
     	}
@@ -46,9 +46,9 @@ public class Environement {
     	for (int i = 0; i <this.taille; i++) {
 			for (int j = 0; j < this.taille; j++) {
 				if(i!=0 || j!=0) {
-					if(proba1<1) {
+					if(proba1 < 1) {
 						grid.get(i*this.taille+j).setMonster(true);
-						if(i==0) {
+						if(i == 0) {
 							grid.get((i+1)*this.taille+j).setSmell(true);
 						}
 						else {
