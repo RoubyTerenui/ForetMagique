@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Agent.Agent;
-import Environement.Box;
 
 public class InferenceManager{
 

@@ -1,4 +1,4 @@
-package Environement;
+package Environment;
 
 public class Box {
 
@@ -17,8 +17,8 @@ public class Box {
         this.rift = rift;
     }
 
-    public Box clone() {
-    	Box clone= new Box(this.wind,this.smell,this.light,this.monster,this.rift);
+    public Box clone(){
+    	Box clone = new Box(this.wind, this.smell, this.light, this.monster, this.rift);
 		return clone;
     }
     

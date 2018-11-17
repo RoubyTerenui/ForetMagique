@@ -1,8 +1,7 @@
 package Agent;
 
 import java.util.ArrayList;
-import Environement.Box;
-import InferenceEngine.Facts;
+import Environment.Box;
 
 public class BDI {
     private int taille;

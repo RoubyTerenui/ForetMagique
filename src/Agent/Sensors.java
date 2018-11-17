@@ -1,7 +1,7 @@
 package Agent;
 
-import Environement.Box;
-import Environement.Environement;
+import Environment.Box;
+import Environment.Environment;
 
 public class Sensors {
 
@@ -9,7 +9,7 @@ public class Sensors {
     {
     }
 
-    public Box obserActualBox(Agent agent, Environement environment) {
+    public Box obserActualBox(Agent agent, Environment environment) {
 		Box box = environment.getGrid().get(agent.getPositionY()*environment.getTaille()+agent.getPositionX()).clone();
 		return box ;
     

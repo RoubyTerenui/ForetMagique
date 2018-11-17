@@ -1,16 +1,14 @@
-package Environement;
+package Environment;
 
 import java.util.ArrayList;
 
-import Environement.Box;
-
-public class Environement {
+public class Environment {
 
     private int taille;
     private ArrayList<Box> grid;
     private int perfMeasure;
 
-    public Environement(){
+    public Environment(){
         this.taille = 3;
         this.grid = new ArrayList<Box>();
         for (int i = 0; i <this.taille; i++) {
@@ -22,7 +20,7 @@ public class Environement {
         this.perfMeasure = 0;
     }
 
-    public void resetEnvironementGrid() {
+    public void resetEnvironmentGrid(){
     	for (int i = 0; i <this.taille; i++) {
 			for (int j = 0; j < this.taille; j++) {
 				grid.set(i*this.taille+j, new Box(false,false,false,false,false));
@@ -30,7 +28,7 @@ public class Environement {
 		}
     	this.randomGeneration();
     }
-    public void generatePortal() {
+    public void generatePortal(){
     	int posX=(int) Math.floor(Math.random()*this.taille);
     	int posY=(int)Math.floor(Math.random()*this.taille);
     	while(grid.get(posX*this.taille+posY).getRift()) {
@@ -40,7 +38,7 @@ public class Environement {
     	grid.get(posX*this.taille+posY).setLight(true);
     	
     }
-    public void randomGeneration() {
+    public void randomGeneration(){
     	double proba1 = Math.random() * 9;
     	double proba2 = Math.random() * 9;
     	for (int i = 0; i <this.taille; i++) {

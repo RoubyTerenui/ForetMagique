@@ -1,7 +1,7 @@
 package Agent;
 
-import Environement.Box;
-import Environement.Environement;
+import Environment.Box;
+import Environment.Environment;
 import InferenceEngine.Facts;
 import InferenceEngine.InferenceManager;
 
@@ -11,30 +11,27 @@ public class Agent {
     private BDI bdi;
     private int positionY;
     private int positionX;
-    private int nbrRockUsed;
     private Sensors sensor;
     private Effectors effectors;
 	private InferenceManager inferenceEngine;
 
     
-    public Agent(int positionY, int positionX, int nbrRockUsed) {
+    public Agent(int positionY, int positionX) {
         this.bdi = new BDI(3);
         this.positionY = positionY;
         this.positionX = positionX;
-        this.nbrRockUsed = nbrRockUsed;
         this.sensor = new Sensors();
         this.effectors = new Effectors();
         this.inferenceEngine=new InferenceManager(this);
     }
 
-    public void updateInternState(Environement environment) {
+    public void updateInternState(Environment environment) {
         Box observedBox = this.sensor.obserActualBox(this, environment);
         this.getBdi().getBelief().set(this.getPositionY()*environment.getTaille()+this.getPositionX(),observedBox);
         this.getInferenceEngine().getListOfFacts().add(new Facts(false, true, false, observedBox.getSmell(), observedBox.getWind(),observedBox.getLight(),observedBox.getMonster(),observedBox.getRift(),false));
     }
 
  // --- GETTERS AND SETTERS ---
-    
     public Effectors getEffectors() {
 		return effectors;
 	}
@@ -43,7 +40,6 @@ public class Agent {
 		return inferenceEngine;
 	}
 
-	
     public BDI getBdi(){
         return bdi;
     }
@@ -68,16 +64,13 @@ public class Agent {
         this.positionX = pX;
     }
 
-    public int getNbrRockUsed(){
-        return nbrRockUsed;
-    }
-
-    public void setNbrRockUsed(int n){
-        this.nbrRockUsed = n;
-    }
-
 	public Sensors getSensor() {
 		return sensor;
 	}
 
+    public void mourir(Environment environment) {
+        this.setPositionX(0);
+        this.setPositionY(0);
+        environment.setPerfMeasure(environment.getPerfMeasure() - 10 * environment.getTaille());
+    }
 }
