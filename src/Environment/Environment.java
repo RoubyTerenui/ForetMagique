@@ -21,10 +21,12 @@ public class Environment {
     }
 
     public void resetEnvironmentGrid(){
-    	for (int i = 0; i <this.taille; i++) {
-			for (int j = 0; j < this.taille; j++) {
-				grid.set(i*this.taille+j, new Box(false,false,false,false,false));
-			}
+    	for (int k=0;k<this.taille-1+this.taille;k++) {
+    		grid.add(new Box(false,false,false,false,false));
+    	}
+    	
+    	for (int i = 0; i <this.taille*this.taille; i++) {
+			grid.set(i, new Box(false,false,false,false,false));
 		}
     	this.randomGeneration();
     }
@@ -46,6 +48,8 @@ public class Environment {
     	for (int i = 0; i <this.taille; i++) {
 			for (int j = 0; j < this.taille; j++) {
 				if(i!=0 || j!=0) {
+					 proba1 = Math.random() * 9;
+				     proba2 = Math.random() * 9;
 					if(proba1 < 1) {
 						grid.get(i*this.taille+j).setMonster(true);
 						if(i == 0) {

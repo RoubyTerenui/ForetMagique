@@ -16,6 +16,11 @@ public class Main {
         UI Test_UI = new UI(test_Agent, environment);
         Test_UI.updateUI();
         test_Agent.mourir(environment);
+        test_Agent.getEffectors().sortir(test_Agent, environment);
+        test_Agent.getEffectors().sortir(test_Agent, environment);
+        test_Agent.getEffectors().sortir(test_Agent, environment);
+        test_Agent.getEffectors().sortir(test_Agent, environment);
+        Test_UI.updateUI();
 
     }
 }

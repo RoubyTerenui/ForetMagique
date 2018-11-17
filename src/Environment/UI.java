@@ -32,13 +32,63 @@ public class UI extends JFrame{
     }
 
     // Other Methods
-    public void updateUI() {
+    public void updateUI() { 
+    	// Needed to change the size of the displayed grid
+        GrillePan = new JPanel(new GridLayout(environment.getTaille(), environment.getTaille()));
+        for (int i = 0; i < environment.getTaille()*environment.getTaille(); i++) {
+            JPanel Content = new JPanel();
+            Content.setBorder(Line);
+            GrillePan.add(Content);
+            GrillePan.setBorder(Line);
+        }        
         for(int i = 0; i < environment.getTaille(); i++) {
             for(int j = 0; j < environment.getTaille(); j++) {
                 GrillePan.getComponent(i * environment.getTaille() + j).setBackground(Color.white);
+                // ---AGENT---
                 if(Test_Agent.getPositionX() * environment.getTaille() + (Test_Agent.getPositionY()) == i * environment.getTaille() + j
                         && Test_Agent.getPositionX() < environment.getTaille() && Test_Agent.getPositionY() < environment.getTaille()) {
                     GrillePan.getComponent(i * environment.getTaille() + j).setBackground(Color.black);
+                }
+                // ---SMELL---
+                if(environment.getGrid().get(i*environment.getTaille()+j).getSmell()==true) {
+                	GrillePan.getComponent(i * environment.getTaille() + j).setBackground(Color.decode("#582900"));
+                }
+                //	---MONSTER---
+                if(environment.getGrid().get(i*environment.getTaille()+j).getMonster()==true) {
+                	GrillePan.getComponent(i * environment.getTaille() + j).setBackground(Color.red);
+                }
+                // ---RIFT---
+                if(environment.getGrid().get(i*environment.getTaille()+j).getRift()==true) {
+                	GrillePan.getComponent(i * environment.getTaille() + j).setBackground(Color.gray);
+                }
+                // ---WIND---
+                if(environment.getGrid().get(i*environment.getTaille()+j).getWind()==true) {
+                	GrillePan.getComponent(i * environment.getTaille() + j).setBackground(Color.blue);
+                	//	---WIND + SMELL ---
+                	if(environment.getGrid().get(i*environment.getTaille()+j).getSmell()==true) {
+                    	GrillePan.getComponent(i * environment.getTaille() + j).setBackground(Color.green);
+                    }
+                }
+                //	---LIGHT---
+                if(environment.getGrid().get(i*environment.getTaille()+j).getLight()==true) {
+                	GrillePan.getComponent(i * environment.getTaille() + j).setBackground(Color.yellow);
+                	// --- LIGHT + SMELL ---
+                	if(environment.getGrid().get(i*environment.getTaille()+j).getSmell()==true) {
+                    	GrillePan.getComponent(i * environment.getTaille() + j).setBackground(Color.orange);
+                    } 
+                	// --- LIGHT + WIND ---
+                	if(environment.getGrid().get(i*environment.getTaille()+j).getWind()==true) {
+                    	GrillePan.getComponent(i * environment.getTaille() + j).setBackground(Color.cyan);
+                    	// --- LIGHT + WIND + SMELL ---
+                    	if(environment.getGrid().get(i*environment.getTaille()+j).getSmell()==true) {
+                        	GrillePan.getComponent(i * environment.getTaille() + j).setBackground(Color.pink);
+                        }
+                	}
+                	else {
+                		if (environment.getGrid().get(i*environment.getTaille()+j).getMonster()==true) {
+                			GrillePan.getComponent(i * environment.getTaille() + j).setBackground(Color.MAGENTA);
+                		}
+                	}
                 }
             }
         }

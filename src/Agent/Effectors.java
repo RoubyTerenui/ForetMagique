@@ -71,7 +71,7 @@ public class Effectors {
             BDI resetBdi=new BDI(agent.getBdi().getTaille()+1);
             agent.setBdi(resetBdi);
             //Change l'environment
-            environment.setTaille(agent.getBdi().getTaille()+1);
+            environment.setTaille(environment.getTaille()+1);
             environment.resetEnvironmentGrid();
             
             environment.setPerfMeasure(environment.getPerfMeasure()+10 * environment.getTaille());
