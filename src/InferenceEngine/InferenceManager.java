@@ -16,7 +16,7 @@ public class InferenceManager{
 
 		for (int i = 0; i < taille; i++) {
 			for (int j = 0; j < taille; j++) {
-				this.listOfFacts.set(i*taille+j, new Facts(false,false,false,false,false,false,false,false,false));
+				this.listOfFacts.add( new Facts(false,false,false,false,false,false,false,false,false));
 			}
 		}
 	}

@@ -13,7 +13,7 @@ public class Environment {
         this.grid = new ArrayList<Box>();
         for (int i = 0; i <this.taille; i++) {
 			for (int j = 0; j < this.taille; j++) {
-				grid.set(i*this.taille+j,new Box(false,false,false,false,false));
+				grid.add(new Box(false,false,false,false,false));
 			}
 		}
         this.randomGeneration();
@@ -28,6 +28,8 @@ public class Environment {
 		}
     	this.randomGeneration();
     }
+    
+    
     public void generatePortal(){
     	int posX=(int) Math.floor(Math.random()*this.taille);
     	int posY=(int)Math.floor(Math.random()*this.taille);

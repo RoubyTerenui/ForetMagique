@@ -14,7 +14,7 @@ public class BDI {
         this.belief = new ArrayList<Box>();
         for (int i = 0; i < taille; i++) {
 			for (int j = 0; j < taille; j++) {
-				belief.set(i*taille+j,new Box(false,false,false,false,false));
+				belief.add(new Box(false,false,false,false,false));
 			}
 		}
         this.intentions = "Ne rien faire" ;

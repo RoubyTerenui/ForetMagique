@@ -18,7 +18,7 @@ public class UI extends JFrame{
     public UI(Agent Test_Agent, Environment environment) {
         Terrain = new JFrame();
         GrillePan = new JPanel(new GridLayout(environment.getTaille(), environment.getTaille()));
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < environment.getTaille()*environment.getTaille(); i++) {
             JPanel Content = new JPanel();
             Content.setBorder(Line);
             GrillePan.add(Content);
