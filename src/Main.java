@@ -1,5 +1,3 @@
-package Main;
-
 import Environment.*;
 import InferenceEngine.*;
 import Agent.*;

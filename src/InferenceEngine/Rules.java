@@ -7,12 +7,12 @@ public class Rules {
 	// --- FIELDS ---
 	
 	private int priority ;
-	private List<Facts> conditions;
-	private List<Facts> conclusions;
+	private List<Object[]> conditions;
+	private List<Object[]> conclusions;
 	
 	// --- CONSTRUCTORS ---
 	
-	public Rules(int priority, List<Facts> conditions, List<Facts> conclusions) {
+	public Rules(int priority, List<Object[]> conditions, List<Object[]> conclusions) {
 		super();
 		this.priority = priority;
 		this.conditions = conditions;
@@ -24,19 +24,19 @@ public class Rules {
 	public int getPriority() {
 		return priority;
 	}
-	public List<Facts> getConclusions() {
+	public List<Object[]> getConclusions() {
 		return conclusions;
 	}	
-	public List<Facts> getConditions() {
+	public List<Object[]> getConditions() {
 		return conditions;
 	}
 	
 	// --- SETTERS ---
 	
-	public void setConditions(List<Facts> conditions) {
+	public void setConditions(List<Object[]> conditions) {
 		this.conditions = conditions;
 	}
-	public void setConclusions(List<Facts> conclusions) {
+	public void setConclusions(List<Object[]> conclusions) {
 		this.conclusions = conclusions;
 	}
 	public void setPriority(int priority) {
