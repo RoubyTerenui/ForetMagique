@@ -44,11 +44,6 @@ public class UI extends JFrame{
         for(int i = 0; i < environment.getTaille(); i++) {
             for(int j = 0; j < environment.getTaille(); j++) {
                 GrillePan.getComponent(i * environment.getTaille() + j).setBackground(Color.white);
-                // ---AGENT---
-                if(Test_Agent.getPositionX() * environment.getTaille() + (Test_Agent.getPositionY()) == i * environment.getTaille() + j
-                        && Test_Agent.getPositionX() < environment.getTaille() && Test_Agent.getPositionY() < environment.getTaille()) {
-                    GrillePan.getComponent(i * environment.getTaille() + j).setBackground(Color.black);
-                }
                 // ---SMELL---
                 if(environment.getGrid().get(i*environment.getTaille()+j).getSmell()==true) {
                 	GrillePan.getComponent(i * environment.getTaille() + j).setBackground(Color.decode("#582900"));
@@ -89,6 +84,12 @@ public class UI extends JFrame{
                 			GrillePan.getComponent(i * environment.getTaille() + j).setBackground(Color.MAGENTA);
                 		}
                 	}
+                }
+                
+             // ---AGENT---
+                if(Test_Agent.getPositionX() * environment.getTaille() + (Test_Agent.getPositionY()) == i * environment.getTaille() + j
+                        && Test_Agent.getPositionX() < environment.getTaille() && Test_Agent.getPositionY() < environment.getTaille()) {
+                    GrillePan.getComponent(i * environment.getTaille() + j).setBackground(Color.black);
                 }
             }
         }

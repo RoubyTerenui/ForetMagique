@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import Environment.Box;
 
 public class BDI {
+	
     private int taille;
     private ArrayList<Box> belief;
     private String intentions;
