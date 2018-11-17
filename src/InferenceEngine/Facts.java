@@ -12,6 +12,7 @@ public class Facts {
     private Boolean F_light;
     private Boolean F_monster;
     private Boolean F_rift;
+    private Boolean F_shooted;
     private Boolean F_deadly;
 
     public Facts(Boolean F_riskless, Boolean F_visited, Boolean F_visitable, Boolean F_smell, Boolean F_wind, Boolean F_light, Boolean F_monster, Boolean F_rift, Boolean F_deadly)
