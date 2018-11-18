@@ -7,6 +7,7 @@ public class Effectors {
 
         public Effectors(){}
 
+        
         public void MoveUP(Agent agent, Environment environment)
         {
             int positionY = agent.getPositionY();
@@ -55,6 +56,7 @@ public class Effectors {
 	            if((agent.getPositionX()+dirX)>0 && (agent.getPositionX()+dirX)<environment.getTaille()) {
 	            	if((agent.getPositionX()+dirX)>0 && (agent.getPositionX()+dirX)<environment.getTaille()) {
 		            	Box temp=environment.getGrid().get((agent.getPositionY()+dirY)*environment.getTaille()+(agent.getPositionX()+dirX)).clone();
+		            	agent.getInferenceEngine().getListOfFacts().get((agent.getPositionY()+dirY)*environment.getTaille()+(agent.getPositionX()+dirX)).setF_shooted(true);
 			            if (temp.getMonster()) {
 			            	temp.setMonster(false);
 			            	environment.getGrid().set((agent.getPositionY()+dirY)*environment.getTaille()+(agent.getPositionX()+dirX), temp);
