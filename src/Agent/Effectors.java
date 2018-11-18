@@ -7,8 +7,40 @@ public class Effectors {
 
         public Effectors(){}
 
+        public void act(int positionCible , String act,Agent agent,Environment environment) {
+        	int posY=positionCible/agent.getBdi().getTaille();
+        	int posX=positionCible%agent.getBdi().getTaille();
+        	if (act=="move") {
+        		move(agent,environment,posY,posX);
+        	}
+        	else {
+        		if(act=="sortir") {
+        			this.sortir(agent,environment);
+        		}
+        		else {
+        			if(act=="tirer") {
+        				this.tirer(agent, environment, agent.getPositionX()-posX, agent.getPositionX()-posY);
+        			}
+        		}
+        	}
+        	
+        	
+        }
         
-        public void MoveUP(Agent agent, Environment environment)
+        public void move(Agent agent, Environment environment ,int posCibleY, int posCibleX)
+        {
+            if ( posCibleY >= 0 && posCibleY < environment.getTaille())
+            {            	
+            	 if ( posCibleX >= 0 && posCibleX < environment.getTaille()) {
+            		 int numberDeplac=Math.abs(agent.getPositionX()-posCibleX)+Math.abs(agent.getPositionX()-posCibleY);
+            		 environment.setPerfMeasure(environment.getPerfMeasure()-numberDeplac);
+            		 agent.setPositionY(posCibleY);
+            		 agent.setPositionX(posCibleX);
+            	 }            	
+            }
+            
+        }
+        public void moveUP(Agent agent, Environment environment)
         {
             int positionY = agent.getPositionY();
             if ( positionY > 0)
@@ -18,27 +50,27 @@ public class Effectors {
             environment.setPerfMeasure(environment.getPerfMeasure()-1);
             agent.setPositionY(positionY);
         }
-        public void MoveDown( Agent agent, Environment environment )
+        public void moveDown( Agent agent, Environment environment )
         {
             int positionY = agent.getPositionY();
-            if (positionY < environment.getTaille())
+            if (positionY < environment.getTaille()-1)
             {
                 positionY++;
             }
             environment.setPerfMeasure(environment.getPerfMeasure()-1);
             agent.setPositionY(positionY);
         }
-        public void MoveRight( Agent agent, Environment environment)
+        public void moveRight( Agent agent, Environment environment)
         {
             int positionX = agent.getPositionX();
-            if (positionX < environment.getTaille())
+            if (positionX < environment.getTaille()-1)
             {
                 positionX++;
             }
             environment.setPerfMeasure(environment.getPerfMeasure()-1);
             agent.setPositionX(positionX);
         }
-        public void MoveLeft( Agent agent, Environment environment)
+        public void moveLeft( Agent agent, Environment environment)
         {
             int positionX = agent.getPositionX();
             if (positionX > 0)
@@ -49,7 +81,7 @@ public class Effectors {
             agent.setPositionX(positionX);
         }
 
-        public void Tirer(Agent agent, Environment environment, int dirX, int dirY)//(-1 pour a gauche/1pour a droite/-1 pour haut /1 pour bas)
+        public void tirer(Agent agent, Environment environment, int dirX, int dirY)//(-1 pour a gauche/1pour a droite/-1 pour haut /1 pour bas)
         {
         	if((dirX==0 && (dirY==1 || dirY==-1))||(dirY==0 && (dirX==1 || dirX==-1))) {
 	            environment.setPerfMeasure(environment.getPerfMeasure()-10);
