@@ -165,18 +165,18 @@ public class ListOfRules {
 		this.listOfRules.add(new Rules (10, conditionRule3, conclusionRule3));
 		
 		
-		// If rift then around not visitable
-		// Si il y a un gouffre dans une case, les cases alentours deviennent non visitables (temporairement pour certaines)
-		
-		List<Object[]> conditionRule4 = new ArrayList<Object[]>();
-		Object[] cd4_1 = {7, true, true}; //{8eme fact, doit etre true, applique sur les cases adj}
-		conditionRule4.add(cd4_1);
-				
-		List<Object[]> conclusionRule4 = new ArrayList<Object[]>();
-		Object[] cc4_1 = {"", 2, false, true}; //{pas d'action, 3eme fact, passe false, applique sur les cases ajd}
-		conclusionRule4.add(cc4_1);
-				
-		this.listOfRules.add(new Rules (11, conditionRule4, conclusionRule4));
+//		// If rift then around not visitable
+//		// Si il y a un gouffre dans une case, les cases alentours deviennent non visitables (temporairement pour certaines)
+//		
+//		List<Object[]> conditionRule4 = new ArrayList<Object[]>();
+//		Object[] cd4_1 = {7, true, true}; //{8eme fact, doit etre true, applique sur les cases adj}
+//		conditionRule4.add(cd4_1);
+//				
+//		List<Object[]> conclusionRule4 = new ArrayList<Object[]>();
+//		Object[] cc4_1 = {"", 2, false, true}; //{pas d'action, 3eme fact, passe false, applique sur les cases ajd}
+//		conclusionRule4.add(cc4_1);
+//				
+//		this.listOfRules.add(new Rules (11, conditionRule4, conclusionRule4));
 		
 		
 		// If visited and not deadly then around visitable
