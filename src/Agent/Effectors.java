@@ -10,18 +10,24 @@ public class Effectors {
         public void act(int positionCible , String act,Agent agent,Environment environment) {
         	int posY=positionCible/agent.getBdi().getTaille();
         	int posX=positionCible%agent.getBdi().getTaille();
-        	if (act=="move") {
-        		move(agent,environment,posY,posX);
+        	if (act=="ne rien faire") {
+        		
         	}
         	else {
-        		if(act=="sortir") {
-        			this.sortir(agent,environment);
-        		}
+        		if (act=="move") {
+            		move(agent,environment,posY,posX);
+            	}
         		else {
-        			if(act=="tirer") {
-        				this.tirer(agent, environment, agent.getPositionX()-posX, agent.getPositionX()-posY);
-        			}
-        		}
+	        		if(act=="sortir") {
+	        			this.sortir(agent,environment);
+	        		}
+	        		else {
+	        			if(act=="tirer") {
+	        				this.move(agent, environment, posY, posX);
+	        				this.tirer(agent, environment, agent.getPositionX(), agent.getPositionX());
+	        			}
+	        		}
+	        	}
         	}
         	
         	
@@ -81,21 +87,21 @@ public class Effectors {
             agent.setPositionX(positionX);
         }
 
-        public void tirer(Agent agent, Environment environment, int dirX, int dirY)//(-1 pour a gauche/1pour a droite/-1 pour haut /1 pour bas)
+        public void tirer(Agent agent, Environment environment,int posX,int posY)//(-1 pour a gauche/1pour a droite/-1 pour haut /1 pour bas)
         {
-        	if((dirX==0 && (dirY==1 || dirY==-1))||(dirY==0 && (dirX==1 || dirX==-1))) {
-	            environment.setPerfMeasure(environment.getPerfMeasure()-10);
-	            if((agent.getPositionX()+dirX)>0 && (agent.getPositionX()+dirX)<environment.getTaille()) {
-	            	if((agent.getPositionX()+dirX)>0 && (agent.getPositionX()+dirX)<environment.getTaille()) {
-		            	Box temp=environment.getGrid().get((agent.getPositionY()+dirY)*environment.getTaille()+(agent.getPositionX()+dirX)).clone();
-		            	agent.getInferenceEngine().getListOfFacts().get((agent.getPositionY()+dirY)*environment.getTaille()+(agent.getPositionX()+dirX)).setF_shooted(true);
-			            if (temp.getMonster()) {
-			            	temp.setMonster(false);
-			            	environment.getGrid().set((agent.getPositionY()+dirY)*environment.getTaille()+(agent.getPositionX()+dirX), temp);
-			            }
-	            	}
-	            }
-        	}
+        	environment.setPerfMeasure(environment.getPerfMeasure()-10);
+        	int numberDeplac=Math.abs(agent.getPositionX()-posX)+Math.abs(agent.getPositionX()-posY);
+   		 	environment.setPerfMeasure(environment.getPerfMeasure()-numberDeplac);
+        	 if ( posY >= 0 && posY < environment.getTaille())
+             {            	
+             	if ( posX >= 0 && posX < environment.getTaille()) {
+	        	Box temp=environment.getGrid().get((posY)*environment.getTaille()+posX).clone();
+			        if (temp.getMonster()) {
+		            	temp.setMonster(false);
+		            	environment.getGrid().set(posY*environment.getTaille()+posX, temp);
+		            }
+             	}
+             }
         }
 
         public void sortir(Agent agent, Environment environment)

@@ -21,8 +21,10 @@ public class ListOfRules {
 		conditionRule1.add(cd1_1);
 		
 		List<Object[]> conclusionRule1 = new ArrayList<Object[]>();
-		Object[] cc1_1 = {"Enter"}; //{action entrer}
+		Object[] cc1_1 = {"Move"}; //{action entrer}
+		Object[] cc1_2 = {"Enter"}; //{action entrer}
 		conclusionRule1.add(cc1_1);
+		conclusionRule1.add(cc1_2);
 		
 		this.listOfRules.add(new Rules (1, conditionRule1, conclusionRule1));
 		
@@ -238,7 +240,7 @@ public class ListOfRules {
 								
 		List<Object[]> conclusionRule16 = new ArrayList<Object[]>();
 		Object[] cc16_1 = {"Shoot"}; //{on target la case}
-		Object[] cc16_2 = {"", 6, false, false}; //{on target la case, 9ème fact, passe à false, applique sur la case}
+		Object[] cc16_2 = {"", 6, false, false}; //{on target la case, 9ï¿½me fact, passe ï¿½ false, applique sur la case}
 		conclusionRule16.add(cc16_1);
 		conclusionRule16.add(cc16_2);
 								

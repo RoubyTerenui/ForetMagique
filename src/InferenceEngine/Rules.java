@@ -1,19 +1,26 @@
 package InferenceEngine;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import Agent.Agent;
 
 public class Rules {
 	
 	// --- FIELDS ---
 	
 	private int priority ;
+	private Boolean applied;
 	private List<Object[]> conditions;
+	private List<int[]> positionsBoxtoTest;
 	private List<Object[]> conclusions;
 	
 	// --- CONSTRUCTORS ---
 	
 	public Rules(int priority, List<Object[]> conditions, List<Object[]> conclusions) {
 		super();
+		this.positionsBoxtoTest=new ArrayList<int[]>();
+		this.applied=false;
 		this.priority = priority;
 		this.conditions = conditions;
 		this.conclusions = conclusions;
@@ -21,12 +28,18 @@ public class Rules {
 	
 	// --- GETTERS ---
 	
+	public List<int[]> getPositionsBoxtoTest() {
+		return positionsBoxtoTest;
+	}
+	public Boolean getApplied() {
+		return applied;
+	}
 	public int getPriority() {
 		return priority;
 	}
 	public List<Object[]> getConclusions() {
 		return conclusions;
-	}	
+	}
 	public List<Object[]> getConditions() {
 		return conditions;
 	}
@@ -42,6 +55,12 @@ public class Rules {
 	public void setPriority(int priority) {
 		this.priority = priority;
 	}
-	
+	public void setApplied(Boolean applied) {
+		this.applied = applied;
+	}
+	public void setPositionsBoxtoTest(List<int[]> positionsBoxtoTest) {
+		this.positionsBoxtoTest = positionsBoxtoTest;
+	}
+
 }
 

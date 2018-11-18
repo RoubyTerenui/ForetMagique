@@ -1,15 +1,18 @@
 package Agent;
 
 import java.util.ArrayList;
+import java.util.List;
+
 import Environment.Box;
 
 public class BDI {
 	
     private int taille;
     private ArrayList<Box> belief;
-    private String intentions;
+    private String intentions;//Format {String action , Position}
 
-    public BDI(int taille)
+    
+	public BDI(int taille)
     {
         this.taille = taille;
         this.belief = new ArrayList<Box>();
@@ -18,7 +21,7 @@ public class BDI {
 				belief.add(new Box(false,false,false,false,false));
 			}
 		}
-        this.intentions = "Ne rien faire" ;
+        this.intentions ="ne rien faire" ;
 
     }
 
@@ -34,10 +37,12 @@ public class BDI {
     public String getIntentions(){
         return intentions;
     }
+    
+    public void setIntentions(String intentions) {
+		this.intentions = intentions;
+	}
 
-    public void setBelief(String i){
-        this.intentions = i;
-    }
+
 
 	public int getTaille() {
 		return taille;
