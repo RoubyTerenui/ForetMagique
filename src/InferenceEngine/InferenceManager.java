@@ -22,6 +22,8 @@ public class InferenceManager{
 		this.setListOfRules(new ListOfRules());
 		this.listOfFacts = new ArrayList<Facts>();
 		this.goal=new ArrayList<Integer>();
+		this.goal.add(0);
+		this.goal.add(0);
 		for (int i = 0; i < taille; i++) {
 			for (int j = 0; j < taille; j++) {
 				this.listOfFacts.add( new Facts(false,false,false,false,false,false,false,false,false,j,i));
@@ -153,9 +155,11 @@ public class InferenceManager{
     	while (goal.size()==0 && this.filterRules().size()!=0) {
     		List<Rules> appliableRules=this.filterRules() ;
     		this.sort(appliableRules);
-    		System.out.println(appliableRules.get(0).getPriority());
     		appliableRules.get(0).setApplied(true);
     		this.execute(agent, appliableRules.get(0), environment);
+        	for (Rules rules : this.getListOfRules().getListOfRules()) {
+    			rules.getPositionsBoxtoTest().clear();
+    		}
 
     	}
     	
@@ -172,8 +176,9 @@ public class InferenceManager{
 			if (conclusion.length == 1) {
 				actionExecuted = true;
 				agent.getBdi().setIntentions((String)conclusion[0]);
-				goal.add(rule.getPositionsBoxtoTest().get(0)[0]);
-				goal.add(rule.getPositionsBoxtoTest().get(0)[1]);	
+				goal.add(rule.getPositionsBoxtoTest().get(rule.getPositionsBoxtoTest().size()-1)[0]);
+				goal.add(rule.getPositionsBoxtoTest().get(rule.getPositionsBoxtoTest().size()-1)[1]);	
+
 			} else {
 				if (!actionExecuted) {
 					for (int[] positions : rule.getPositionsBoxtoTest()) {

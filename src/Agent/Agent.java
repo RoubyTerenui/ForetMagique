@@ -43,9 +43,15 @@ public class Agent {
     // --- EXECUTE ACTIONS ---
     
     public void executeIntent(Environment environment) {
+    	System.out.println("ActualFacts-------------");
+    	for (Facts  fact: this.getInferenceEngine().getListOfFacts()) {
+    		System.out.println("List Boolean :"+ fact.getListOfBoolean());
+			System.out.println("PosX : "+fact.getPositionX());
+			System.out.println("PosY : "+fact.getPositionY());
+		}
+    	this.getEffectors().act(inferenceEngine.goal.get(1)*environment.getTaille()+inferenceEngine.goal.get(0),this.getBdi().getIntentions(), this, environment);
     	this.updateInternState(environment);
     	inferenceEngine.forwardChaining(this, environment) ;
-    	this.getEffectors().act(inferenceEngine.goal.get(1)*environment.getTaille()+inferenceEngine.goal.get(0),this.getBdi().getIntentions(), this, environment);
     	for (Rules rules : this.inferenceEngine.getListOfRules().getListOfRules()) {
 			rules.setApplied(false);
 			rules.getPositionsBoxtoTest().clear();
@@ -90,7 +96,14 @@ public class Agent {
 	}
 
     public void mourir(Environment environment) {
-    	System.out.println("DEATH");
+    	for(int j=0;j < this.getInferenceEngine().getListOfFacts().size();j++ ) { 	
+  			if (this.getInferenceEngine().getListOfFacts().get(j).getPositionX() == this.positionX
+  					&& this.getInferenceEngine().getListOfFacts().get(j).getPositionY() == this.positionY) {
+  				this.getInferenceEngine().getListOfFacts().get(j).getListOfBoolean().set(9,true);
+  			}
+  		}
+     	this.updateInternState(environment);
+    	System.out.println("DEATH--------------------");
     	System.out.println(this.getPositionX());
     	System.out.println(this.getPositionY());
     	for (Facts  fact: this.getInferenceEngine().getListOfFacts()) {
@@ -98,7 +111,8 @@ public class Agent {
 			System.out.println("PosX : "+fact.getPositionX());
 			System.out.println("PosY : "+fact.getPositionY());
 		}
-    	updateInternState(environment);
+
+    	
         this.setPositionX(0);
         this.setPositionY(0);
         environment.setPerfMeasure(environment.getPerfMeasure() - 10 * environment.getTaille());

@@ -163,36 +163,18 @@ public class ListOfRules {
 		this.listOfRules.add(new Rules (9, conditionRule7, conclusionRule7));
 		
 		
-		// If visited and rift then deadly
-		// Si une case a deje ete visitee et qu'on y a trouve un gouffre, alors elle est mortelle
+		// If rift then around not visitable
+		// Si il y a un gouffre dans une case, les cases alentours deviennent non visitables (temporairement pour certaines)
 		
-		List<Object[]> conditionRule3 = new ArrayList<Object[]>();
-		Object[] cd3_1 = {1, true, false}; //{2eme fact, doit etre true, applique sur la case}
-		Object[] cd3_2 = {7, true, false}; //{8eme fact, doit etre true, applique sur la case}
-		conditionRule3.add(cd3_1);
-		conditionRule3.add(cd3_2);
-						
-		List<Object[]> conclusionRule3 = new ArrayList<Object[]>();
-		Object[] cc3_1 = {"", 9, true, false}; //{pas d'action, 10eme fact, passe true, applique sur la case }
-		Object[] cc3_2 = {"", 0, false, false}; //{pas d'action, 10eme fact, passe true, applique sur la case }
-		conclusionRule3.add(cc3_1);
-		conclusionRule3.add(cc3_2);
-						
-		this.listOfRules.add(new Rules (10, conditionRule3, conclusionRule3));
-		
-		
-//		// If rift then around not visitable
-//		// Si il y a un gouffre dans une case, les cases alentours deviennent non visitables (temporairement pour certaines)
-//		
-//		List<Object[]> conditionRule4 = new ArrayList<Object[]>();
-//		Object[] cd4_1 = {7, true, true}; //{8eme fact, doit etre true, applique sur les cases adj}
-//		conditionRule4.add(cd4_1);
-//				
-//		List<Object[]> conclusionRule4 = new ArrayList<Object[]>();
-//		Object[] cc4_1 = {"", 2, false, true}; //{pas d'action, 3eme fact, passe false, applique sur les cases ajd}
-//		conclusionRule4.add(cc4_1);
-//				
-//		this.listOfRules.add(new Rules (11, conditionRule4, conclusionRule4));
+		List<Object[]> conditionRule4 = new ArrayList<Object[]>();
+		Object[] cd4_1 = {7, true, true}; //{8eme fact, doit etre true, applique sur les cases adj}
+		conditionRule4.add(cd4_1);
+				
+		List<Object[]> conclusionRule4 = new ArrayList<Object[]>();
+		Object[] cc4_1 = {"", 2, false, true}; //{pas d'action, 3eme fact, passe false, applique sur les cases ajd}
+		conclusionRule4.add(cc4_1);
+				
+		this.listOfRules.add(new Rules (11, conditionRule4, conclusionRule4));
 		
 		
 		// If visited and not deadly then around visitable
@@ -247,8 +229,8 @@ public class ListOfRules {
 		// Si une case est visitable et avec un monstre, on la target, on tue le monstre et on met fin au filtrage
 				
 		List<Object[]> conditionRule16 = new ArrayList<Object[]>();
-		Object[] cd16_1 = {2, true, false}; //{1er fact, doit etre true, applique sur la case}
-		Object[] cd16_2 = {6, true, false}; //{3eme fact, doit etre true, applique sur la case}
+		Object[] cd16_1 = {2, true, false}; //{3eme fact, doit etre true, applique sur la case}
+		Object[] cd16_2 = {6, true, false}; //{7eme fact, doit etre true, applique sur la case}
 		conditionRule16.add(cd16_1);
 		conditionRule16.add(cd16_2);
 								
