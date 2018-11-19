@@ -9,7 +9,7 @@ public class BDI {
 	
     private int taille;
     private ArrayList<Box> belief;
-    private String intentions;//Format {String action , Position}
+    private String intentions;//String action 
 
     
 	public BDI(int taille)

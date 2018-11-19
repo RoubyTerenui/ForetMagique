@@ -12,6 +12,7 @@ public class InferenceManager{
 	
 	private List<Facts> listOfFacts;
 	private ListOfRules listOfRules;
+	public List<Integer> goal;
 	
 	// --- CONSTRUCTOR ---
 	
@@ -20,7 +21,15 @@ public class InferenceManager{
 		int taille = agent.getBdi().getTaille();
 		this.setListOfRules(new ListOfRules());
 		this.listOfFacts = new ArrayList<Facts>();
-
+		this.goal=new ArrayList<Integer>();
+		for (int i = 0; i < taille; i++) {
+			for (int j = 0; j < taille; j++) {
+				this.listOfFacts.add( new Facts(false,false,false,false,false,false,false,false,false,j,i));
+			}
+		}
+	}
+	public void resetListofFacts(Agent agent) {
+		int taille = agent.getBdi().getTaille();
 		for (int i = 0; i < taille; i++) {
 			for (int j = 0; j < taille; j++) {
 				this.listOfFacts.add( new Facts(false,false,false,false,false,false,false,false,false,j,i));
@@ -59,7 +68,7 @@ public class InferenceManager{
 			{
 				Boolean unrequired=true;
 				for (int count=0; count<this.listOfFacts.size() ; count++) {
-					Boolean allRespected=true;
+					Boolean allRespected=true;					
 					for (Object[] condition : rules.getConditions()) {
 						if(listOfFacts.get(count).getListOfBoolean().get((int) condition[0])!=(Boolean)condition[1]){
 							allRespected=false;
@@ -77,7 +86,7 @@ public class InferenceManager{
 					appliableRules.add(rules);
 				}
 			}
-		}		
+		}
 		return appliableRules;		
 	}
 	
@@ -136,32 +145,38 @@ public class InferenceManager{
     
     // --- FORWARD CHAINING ---
     
-    public int[] forwardChaining(Agent agent ,Environment environment) {
-    	int[] goal = null;
-    	while (goal== null && this.filterRules().size()!=0) {
+    public void forwardChaining(Agent agent ,Environment environment) {
+    	int count=0;
+    	if(goal.size()>0) {
+        	goal.remove(0);
+        	goal.remove(0);
+    	}
+
+    	while (goal.size()==0 && this.filterRules().size()!=0) {
     		List<Rules> appliableRules=this.filterRules() ;
     		this.sort(appliableRules);
+    		System.out.println(appliableRules.get(0).getPriority());
     		appliableRules.get(0).setApplied(true);
-    		goal=this.execute(agent, appliableRules.get(0), environment);
+    		this.execute(agent, appliableRules.get(0), environment);getClass();
+    		count++;
     		
     	}
-    	return goal;
     	
     }
     
     
 	// --- METHOD TO EXECUTE RULES  ---
 
-	public int[] execute(Agent agent, Rules rule, Environment environment) {
+	public void execute(Agent agent, Rules rule, Environment environment) {
 		Boolean actionExecuted = false;
-		int[] goal = null;
+		
 		for (Object[] conclusion : rule.getConclusions()) {
-			if (conclusion.length == 0) {
+			
+			if (conclusion.length == 1) {
 				actionExecuted = true;
 				agent.getBdi().setIntentions((String)conclusion[0]);
-				int[] temp= { rule.getPositionsBoxtoTest().get(0)[0],rule.getPositionsBoxtoTest().get(0)[1]};
-				goal=temp;
-				
+				goal.add(rule.getPositionsBoxtoTest().get(0)[0]);
+				goal.add(rule.getPositionsBoxtoTest().get(0)[1]);	
 			} else {
 				if (!actionExecuted) {
 					for (int[] positions : rule.getPositionsBoxtoTest()) {
@@ -170,8 +185,7 @@ public class InferenceManager{
 						// or the Box
 						if ((Boolean) conclusion[3] == false) {
 							int j = 0;
-							while (j < listOfFacts.size() && listOfFacts.get(j).getPositionX() != positions[0]
-									|| listOfFacts.get(j).getPositionY() != positions[1]) {
+							while (j < listOfFacts.size() ) {
 								if (listOfFacts.get(j).getPositionX() == positions[0]
 										&& listOfFacts.get(j).getPositionY() == positions[1]) {
 									listOfFacts.get(j).getListOfBoolean().set((int) conclusion[1],
@@ -188,18 +202,26 @@ public class InferenceManager{
 								// No bound issue because the Facts are never assigned with out ouf bound values
 								if (facts.getPositionX() == positions[0] - 1
 										&& facts.getPositionY() == positions[1]) {
+									facts.getListOfBoolean().set((int) conclusion[1],
+											(Boolean) conclusion[2]);
 
 								} else {
 									if (facts.getPositionX() == positions[0] + 1
 											&& facts.getPositionY() == positions[1]) {
+										facts.getListOfBoolean().set((int) conclusion[1],
+												(Boolean) conclusion[2]);
 
 									} else {
 										if (facts.getPositionX() == positions[0]
 												&& facts.getPositionY() == positions[1] - 1) {
+											facts.getListOfBoolean().set((int) conclusion[1],
+													(Boolean) conclusion[2]);
 
 										} else {
 											if (facts.getPositionX() == positions[0] - 1
 													&& facts.getPositionY() == positions[1] + 1) {
+												facts.getListOfBoolean().set((int) conclusion[1],
+														(Boolean) conclusion[2]);
 											}
 										}
 									}
@@ -214,8 +236,7 @@ public class InferenceManager{
 					// Boolean which indicate if the resulting Facts concerns the neighbouring Box
 					// or the Box
 					if ((Boolean) conclusion[3] == false) {
-						while (j < listOfFacts.size() && listOfFacts.get(j).getPositionX() != firstBoxConcerned[0]
-								|| listOfFacts.get(j).getPositionY() != firstBoxConcerned[1]) {
+						while (j < listOfFacts.size() ) {
 							j++;
 							if (listOfFacts.get(j).getPositionX() == firstBoxConcerned[0]
 									&& listOfFacts.get(j).getPositionY() == firstBoxConcerned[1]) {
@@ -229,20 +250,25 @@ public class InferenceManager{
 					if ((Boolean) conclusion[3] == true) {
 						for (Facts facts : listOfFacts) {
 							// No bound issue because the Facts are never assigned with out ouf bound values
-							if (listOfFacts.get(j).getPositionX() == firstBoxConcerned[0] - 1
-									&& listOfFacts.get(j).getPositionY() == firstBoxConcerned[1]) {
-
+							if (facts.getPositionX() == firstBoxConcerned[0] - 1
+									&& facts.getPositionY() == firstBoxConcerned[1]) {
+								facts.getListOfBoolean().set((int) conclusion[1],
+										(Boolean) conclusion[2]);
 							} else {
-								if (listOfFacts.get(j).getPositionX() == firstBoxConcerned[0] + 1
-										&& listOfFacts.get(j).getPositionY() == firstBoxConcerned[1]) {
-
+								if (facts.getPositionX() == firstBoxConcerned[0] + 1
+										&& facts.getPositionY() == firstBoxConcerned[1]) {
+									facts.getListOfBoolean().set((int) conclusion[1],
+											(Boolean) conclusion[2]);
 								} else {
-									if (listOfFacts.get(j).getPositionX() == firstBoxConcerned[0]
-											&& listOfFacts.get(j).getPositionY() == firstBoxConcerned[1] - 1) {
-
+									if (facts.getPositionX() == firstBoxConcerned[0]
+											&& facts.getPositionY() == firstBoxConcerned[1] - 1) {
+										facts.getListOfBoolean().set((int) conclusion[1],
+												(Boolean) conclusion[2]);
 									} else {
-										if (listOfFacts.get(j).getPositionX() == firstBoxConcerned[0] - 1
-												&& listOfFacts.get(j).getPositionY() == firstBoxConcerned[1] + 1) {
+										if (facts.getPositionX() == firstBoxConcerned[0] - 1
+												&& facts.getPositionY() == firstBoxConcerned[1] + 1) {
+											facts.getListOfBoolean().set((int) conclusion[1],
+													(Boolean) conclusion[2]);
 										}
 									}
 								}
@@ -255,7 +281,6 @@ public class InferenceManager{
 				}
 			}
 		}
-		return(goal);
 
 	}
 }

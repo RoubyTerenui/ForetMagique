@@ -29,30 +29,23 @@ public class Agent {
     public void updateInternState(Environment environment) {
         Box observedBox = this.sensor.obserActualBox(this, environment);
         this.getBdi().getBelief().set(this.getPositionY()*environment.getTaille()+this.getPositionX(),observedBox);
-        int j=0;
-        while (j < this.getInferenceEngine().getListOfFacts().size() && this.getInferenceEngine().getListOfFacts().get(j).getPositionX() != this.positionX
-				|| this.getInferenceEngine().getListOfFacts().get(j).getPositionY() != this.positionY) {
-			
+       for(int j=0;j < this.getInferenceEngine().getListOfFacts().size();j++ ) { 	
 			if (this.getInferenceEngine().getListOfFacts().get(j).getPositionX() == this.positionX
 					&& this.getInferenceEngine().getListOfFacts().get(j).getPositionY() == this.positionY) {
 				this.getInferenceEngine().getListOfFacts().get(j).updateFacts(observedBox.getSmell(), observedBox.getWind(), observedBox.getLight(),observedBox.getMonster(), observedBox.getRift());
-
+				this.getInferenceEngine().getListOfFacts().get(j).getListOfBoolean().set(1,true);
 			}
-			j++;
 		}
-        if(j==this.getInferenceEngine().getListOfFacts().size())
-        {
-        	this.getInferenceEngine().getListOfFacts().add(new Facts(false, true, false, observedBox.getSmell(), observedBox.getWind(),observedBox.getLight(),observedBox.getMonster(),observedBox.getRift(),false,this.getPositionY(),this.getPositionX()));
-        }
     }
     // --- EXECUTE ACTIONS ---
     
     public void executeIntent(Environment environment) {
     	this.updateInternState(environment);
-    	int[] goal=inferenceEngine.forwardChaining(this, environment) ;
-    	this.getEffectors().act(goal[1]*environment.getTaille()+goal[0],this.getBdi().getIntentions(), this, environment);
+    	inferenceEngine.forwardChaining(this, environment) ;  
+    	this.getEffectors().act(inferenceEngine.goal.get(1)*environment.getTaille()+inferenceEngine.goal.get(0),this.getBdi().getIntentions(), this, environment);
     	for (Rules rules : this.inferenceEngine.getListOfRules().getListOfRules()) {
 			rules.setApplied(false);
+			rules.getPositionsBoxtoTest().clear();
 		}
     }
 
@@ -94,6 +87,7 @@ public class Agent {
 	}
 
     public void mourir(Environment environment) {
+    	System.out.println("DEATH88888888888888888888888888888888");
         this.setPositionX(0);
         this.setPositionY(0);
         environment.setPerfMeasure(environment.getPerfMeasure() - 10 * environment.getTaille());

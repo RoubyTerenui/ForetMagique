@@ -12,17 +12,17 @@ public class Main {
         Agent test_Agent = new Agent(0, 0);
         Environment environment = new Environment();
         UI Test_UI = new UI(test_Agent, environment);
-        while(true) {
-        	Thread.sleep(1000);
-        	test_Agent.executeIntent(environment);
-			if (environment.getGrid()
+       while(true) {
+    	   Thread.sleep(1000);
+    	   Test_UI.updateUI();
+    	   test_Agent.executeIntent(environment);
+    	   if (environment.getGrid()
 					.get(test_Agent.getPositionX() + test_Agent.getPositionY() * environment.getTaille()).getMonster()
 					|| environment.getGrid()
 							.get(test_Agent.getPositionX() + test_Agent.getPositionY() * environment.getTaille())
 							.getRift()) {
 					test_Agent.mourir(environment);
 			}
-        }
-       
+       }  
     }
 }

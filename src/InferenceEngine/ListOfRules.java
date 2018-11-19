@@ -263,18 +263,18 @@ public class ListOfRules {
 		this.listOfRules.add(new Rules (16, conditionRule17, conclusionRule17));
 		
 		
-		// Last rule
-		// On met fin au filtrage
-				
-		List<Object[]> conditionRule18 = new ArrayList<Object[]>();
-		Object[] cd18_1 = {};
-		conditionRule18.add(cd18_1);
-								
-		List<Object[]> conclusionRule18 = new ArrayList<Object[]>();
-		Object[] cc18_1 = {""};
-		conclusionRule18.add(cc18_1);
-								
-		this.listOfRules.add(new Rules (17, conditionRule18, conclusionRule18));
+//		// Last rule
+//		// On met fin au filtrage
+//				
+//		List<Object[]> conditionRule18 = new ArrayList<Object[]>();
+//		Object[] cd18_1 = {};
+//		conditionRule18.add(cd18_1);
+//								
+//		List<Object[]> conclusionRule18 = new ArrayList<Object[]>();
+//		Object[] cc18_1 = {""};
+//		conclusionRule18.add(cc18_1);
+//								
+//		this.listOfRules.add(new Rules (17, conditionRule18, conclusionRule18));
 
 
 	}

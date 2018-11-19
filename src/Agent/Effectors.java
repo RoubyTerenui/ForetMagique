@@ -8,27 +8,20 @@ public class Effectors {
         public Effectors(){}
 
         public void act(int positionCible , String act,Agent agent,Environment environment) {
-        	int posY=positionCible/agent.getBdi().getTaille();
-        	int posX=positionCible%agent.getBdi().getTaille();
-        	if (act=="ne rien faire") {
-        		
-        	}
-        	else {
-        		if (act=="move") {
-            		move(agent,environment,posY,posX);
-            	}
-        		else {
-	        		if(act=="sortir") {
-	        			this.sortir(agent,environment);
-	        		}
-	        		else {
-	        			if(act=="tirer") {
-	        				this.move(agent, environment, posY, posX);
-	        				this.tirer(agent, environment, agent.getPositionX(), agent.getPositionX());
-	        			}
-	        		}
-	        	}
-        	}
+        int posX=positionCible%agent.getBdi().getTaille();
+        int posY=positionCible/agent.getBdi().getTaille();
+		if (act == "Move") {
+			move(agent, environment, posY, posX);
+		} else {
+			if (act == "Enter") {
+				this.sortir(agent, environment);
+			} else {
+				if (act == "Shoot") {
+					this.move(agent, environment, posX, posY);
+					this.tirer(agent, environment, agent.getPositionX(), agent.getPositionX());
+				}
+			}
+		}
         	
         	
         }
@@ -106,13 +99,17 @@ public class Effectors {
 
         public void sortir(Agent agent, Environment environment)
         {
+        	//Change l'environment
+            environment.setTaille(environment.getTaille()+1);
+            environment.resetEnvironmentGrid();
             agent.setPositionX(0);
             agent.setPositionY(0);
             BDI resetBdi=new BDI(agent.getBdi().getTaille()+1);
             agent.setBdi(resetBdi);
-            //Change l'environment
-            environment.setTaille(environment.getTaille()+1);
-            environment.resetEnvironmentGrid();
+            agent.getInferenceEngine().getListOfFacts().clear();
+            agent.getInferenceEngine().resetListofFacts(agent);
+            agent.updateInternState(environment);
+
             
             environment.setPerfMeasure(environment.getPerfMeasure()+10 * environment.getTaille());
         }

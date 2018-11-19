@@ -48,14 +48,6 @@ public class UI extends JFrame{
                 if(environment.getGrid().get(i*environment.getTaille()+j).getSmell()==true) {
                 	GrillePan.getComponent(i * environment.getTaille() + j).setBackground(Color.decode("#582900"));
                 }
-                //	---MONSTER---
-                if(environment.getGrid().get(i*environment.getTaille()+j).getMonster()==true) {
-                	GrillePan.getComponent(i * environment.getTaille() + j).setBackground(Color.red);
-                }
-                // ---RIFT---
-                if(environment.getGrid().get(i*environment.getTaille()+j).getRift()==true) {
-                	GrillePan.getComponent(i * environment.getTaille() + j).setBackground(Color.gray);
-                }
                 // ---WIND---
                 if(environment.getGrid().get(i*environment.getTaille()+j).getWind()==true) {
                 	GrillePan.getComponent(i * environment.getTaille() + j).setBackground(Color.blue);
@@ -84,6 +76,14 @@ public class UI extends JFrame{
                 			GrillePan.getComponent(i * environment.getTaille() + j).setBackground(Color.MAGENTA);
                 		}
                 	}
+                }
+                //	---MONSTER---
+                if(environment.getGrid().get(i*environment.getTaille()+j).getMonster()==true) {
+                	GrillePan.getComponent(i * environment.getTaille() + j).setBackground(Color.red);
+                }
+                // ---RIFT---
+                if(environment.getGrid().get(i*environment.getTaille()+j).getRift()==true) {
+                	GrillePan.getComponent(i * environment.getTaille() + j).setBackground(Color.gray);
                 }
                 
              // ---AGENT---
