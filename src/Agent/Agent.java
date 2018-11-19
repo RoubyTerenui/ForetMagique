@@ -29,9 +29,12 @@ public class Agent {
     public void updateInternState(Environment environment) {
         Box observedBox = this.sensor.obserActualBox(this, environment);
         this.getBdi().getBelief().set(this.getPositionY()*environment.getTaille()+this.getPositionX(),observedBox);
-       for(int j=0;j < this.getInferenceEngine().getListOfFacts().size();j++ ) { 	
+        for(int j=0;j < this.getInferenceEngine().getListOfFacts().size();j++ ) { 	
 			if (this.getInferenceEngine().getListOfFacts().get(j).getPositionX() == this.positionX
 					&& this.getInferenceEngine().getListOfFacts().get(j).getPositionY() == this.positionY) {
+				//System.out.println(this.positionX);
+				//System.out.println(this.positionY);
+				//System.out.println(this.getInferenceEngine().getListOfFacts().get(j).getListOfBoolean());
 				this.getInferenceEngine().getListOfFacts().get(j).updateFacts(observedBox.getSmell(), observedBox.getWind(), observedBox.getLight(),observedBox.getMonster(), observedBox.getRift());
 				this.getInferenceEngine().getListOfFacts().get(j).getListOfBoolean().set(1,true);
 			}
@@ -41,7 +44,7 @@ public class Agent {
     
     public void executeIntent(Environment environment) {
     	this.updateInternState(environment);
-    	inferenceEngine.forwardChaining(this, environment) ;  
+    	inferenceEngine.forwardChaining(this, environment) ;
     	this.getEffectors().act(inferenceEngine.goal.get(1)*environment.getTaille()+inferenceEngine.goal.get(0),this.getBdi().getIntentions(), this, environment);
     	for (Rules rules : this.inferenceEngine.getListOfRules().getListOfRules()) {
 			rules.setApplied(false);
@@ -87,7 +90,15 @@ public class Agent {
 	}
 
     public void mourir(Environment environment) {
-    	System.out.println("DEATH88888888888888888888888888888888");
+    	System.out.println("DEATH");
+    	System.out.println(this.getPositionX());
+    	System.out.println(this.getPositionY());
+    	for (Facts  fact: this.getInferenceEngine().getListOfFacts()) {
+    		System.out.println("List Boolean :"+ fact.getListOfBoolean());
+			System.out.println("PosX : "+fact.getPositionX());
+			System.out.println("PosY : "+fact.getPositionY());
+		}
+    	updateInternState(environment);
         this.setPositionX(0);
         this.setPositionY(0);
         environment.setPerfMeasure(environment.getPerfMeasure() - 10 * environment.getTaille());

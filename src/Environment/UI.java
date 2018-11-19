@@ -26,7 +26,7 @@ public class UI extends JFrame{
         this.environment = environment;
         this.Test_Agent = Test_Agent;
         GrillePan.setBorder(Line);
-        Terrain.add(GrillePan);
+        Terrain.setContentPane(GrillePan);
         Terrain.setVisible(true);
         Terrain.setExtendedState(Terrain.getExtendedState() | JFrame.MAXIMIZED_BOTH);
     }
@@ -87,14 +87,16 @@ public class UI extends JFrame{
                 }
                 
              // ---AGENT---
-                if(Test_Agent.getPositionX() * environment.getTaille() + (Test_Agent.getPositionY()) == i * environment.getTaille() + j
+                if(Test_Agent.getPositionY() * environment.getTaille() + (Test_Agent.getPositionX()) == i * environment.getTaille() + j
                         && Test_Agent.getPositionX() < environment.getTaille() && Test_Agent.getPositionY() < environment.getTaille()) {
                     GrillePan.getComponent(i * environment.getTaille() + j).setBackground(Color.black);
                 }
             }
         }
         this.Terrain.setContentPane(GrillePan);
+        this.Terrain.revalidate();
     }
+
 
     // Getter and setter
     public Environment getEnvironment(){

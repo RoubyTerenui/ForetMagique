@@ -17,8 +17,8 @@ public class Effectors {
 				this.sortir(agent, environment);
 			} else {
 				if (act == "Shoot") {
-					this.move(agent, environment, posX, posY);
-					this.tirer(agent, environment, agent.getPositionX(), agent.getPositionX());
+					this.tirer(agent, environment, agent.getPositionX(), agent.getPositionY());
+					this.move(agent, environment, posY, posX);
 				}
 			}
 		}
@@ -88,7 +88,10 @@ public class Effectors {
         	 if ( posY >= 0 && posY < environment.getTaille())
              {            	
              	if ( posX >= 0 && posX < environment.getTaille()) {
+             	System.out.println("posX"+":"+posX);
+             	System.out.println("posY"+":"+posY);
 	        	Box temp=environment.getGrid().get((posY)*environment.getTaille()+posX).clone();
+	        	System.out.println(temp.getMonster());
 			        if (temp.getMonster()) {
 		            	temp.setMonster(false);
 		            	environment.getGrid().set(posY*environment.getTaille()+posX, temp);

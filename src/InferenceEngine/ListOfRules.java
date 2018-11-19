@@ -38,7 +38,10 @@ public class ListOfRules {
 						
 		List<Object[]> conclusionRule8 = new ArrayList<Object[]>();
 		Object[] cc8_1 = {"", 6, true, true}; //{pas d'action, 7eme fact, passe true, applique sur les cases ajd}
+		Object[] cc8_2 = {"", 0, false, true}; //{pas d'action, 1er fact, passe true, applique sur les cases ajd}
+		conclusionRule8.add(cc8_2);
 		conclusionRule8.add(cc8_1);
+		
 						
 		this.listOfRules.add(new Rules (2, conditionRule8, conclusionRule8));
 		
@@ -68,7 +71,10 @@ public class ListOfRules {
 						
 		List<Object[]> conclusionRule10 = new ArrayList<Object[]>();
 		Object[] cc10_1 = {"", 7, true, true}; //{pas d'action, 8eme fact, passe true, applique sur les cases ajd}
+		Object[] cc10_2 = {"", 0, false, true}; //{pas d'action, 1er fact, passe false, applique sur les cases ajd}
+		conclusionRule10.add(cc10_2);
 		conclusionRule10.add(cc10_1);
+		
 						
 		this.listOfRules.add(new Rules (4, conditionRule10, conclusionRule10));
 		
@@ -96,7 +102,9 @@ public class ListOfRules {
 				
 		List<Object[]> conditionRule12 = new ArrayList<Object[]>();
 		Object[] cd12_1 = {3, false, false}; //{4eme fact, doit etre false, applique sur la case}
+		Object[] cd12_2 = {1, true, false}; //{2eme fact, doit etre true, applique sur la case}
 		conditionRule12.add(cd12_1);
+		conditionRule12.add(cd12_2);
 				
 		List<Object[]> conclusionRule12 = new ArrayList<Object[]>();
 		Object[] cc12_1 = {"", 6, false, true}; //{pas d'action, 7eme fact, passe false, applique sur les cases ajd}
@@ -110,7 +118,9 @@ public class ListOfRules {
 				
 		List<Object[]> conditionRule13 = new ArrayList<Object[]>();
 		Object[] cd13_1 = {4, false, false}; //{5eme fact, doit etre false, applique sur la case}
+		Object[] cd13_2 = {1, true, false}; //{2eme fact, doit etre true, applique sur la case}
 		conditionRule13.add(cd13_1);
+		conditionRule13.add(cd13_2);
 				
 		List<Object[]> conclusionRule13 = new ArrayList<Object[]>();
 		Object[] cc13_1 = {"", 7, false, true}; //{pas d'action, 8eme fact, passe false, applique sur les cases ajd}
@@ -141,8 +151,10 @@ public class ListOfRules {
 		List<Object[]> conditionRule7 = new ArrayList<Object[]>();
 		Object[] cd7_1 = {3, false, false}; //{4eme fact, doit etre false, applique sur la case}
 		Object[] cd7_2 = {4, false, false}; //{5eme fact, doit etre false, applique sur la case}
+		Object[] cd7_3 = {1, true, false}; //{2eme fact, doit etre true, applique sur la case}
 		conditionRule7.add(cd7_1);
 		conditionRule7.add(cd7_2);
+		conditionRule7.add(cd7_3);
 						
 		List<Object[]> conclusionRule7 = new ArrayList<Object[]>();
 		Object[] cc7_1 = {"", 0, true, true}; //{pas d'action, 1er fact, passe true, applique sur les cases ajd}
@@ -162,7 +174,9 @@ public class ListOfRules {
 						
 		List<Object[]> conclusionRule3 = new ArrayList<Object[]>();
 		Object[] cc3_1 = {"", 9, true, false}; //{pas d'action, 10eme fact, passe true, applique sur la case }
+		Object[] cc3_2 = {"", 0, false, false}; //{pas d'action, 10eme fact, passe true, applique sur la case }
 		conclusionRule3.add(cc3_1);
+		conclusionRule3.add(cc3_2);
 						
 		this.listOfRules.add(new Rules (10, conditionRule3, conclusionRule3));
 		
@@ -233,7 +247,7 @@ public class ListOfRules {
 		// Si une case est visitable et avec un monstre, on la target, on tue le monstre et on met fin au filtrage
 				
 		List<Object[]> conditionRule16 = new ArrayList<Object[]>();
-		Object[] cd16_1 = {0, true, false}; //{1er fact, doit etre true, applique sur la case}
+		Object[] cd16_1 = {2, true, false}; //{1er fact, doit etre true, applique sur la case}
 		Object[] cd16_2 = {6, true, false}; //{3eme fact, doit etre true, applique sur la case}
 		conditionRule16.add(cd16_1);
 		conditionRule16.add(cd16_2);
@@ -251,7 +265,7 @@ public class ListOfRules {
 		// Si une case est visitable et avec un gouffre, on la target et on met fin au filtrage
 				
 		List<Object[]> conditionRule17 = new ArrayList<Object[]>();
-		Object[] cd17_1 = {0, true, false}; //{1er fact, doit etre true, applique sur la case}
+		Object[] cd17_1 = {2, true, false}; //{1er fact, doit etre true, applique sur la case}
 		Object[] cd17_2 = {7, true, false}; //{8eme fact, doit etre true, applique sur la case}
 		conditionRule17.add(cd17_1);
 		conditionRule17.add(cd17_2);

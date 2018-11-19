@@ -146,20 +146,17 @@ public class InferenceManager{
     // --- FORWARD CHAINING ---
     
     public void forwardChaining(Agent agent ,Environment environment) {
-    	int count=0;
     	if(goal.size()>0) {
         	goal.remove(0);
         	goal.remove(0);
     	}
-
     	while (goal.size()==0 && this.filterRules().size()!=0) {
     		List<Rules> appliableRules=this.filterRules() ;
     		this.sort(appliableRules);
     		System.out.println(appliableRules.get(0).getPriority());
     		appliableRules.get(0).setApplied(true);
-    		this.execute(agent, appliableRules.get(0), environment);getClass();
-    		count++;
-    		
+    		this.execute(agent, appliableRules.get(0), environment);
+
     	}
     	
     }
@@ -218,7 +215,7 @@ public class InferenceManager{
 													(Boolean) conclusion[2]);
 
 										} else {
-											if (facts.getPositionX() == positions[0] - 1
+											if (facts.getPositionX() == positions[0] 
 													&& facts.getPositionY() == positions[1] + 1) {
 												facts.getListOfBoolean().set((int) conclusion[1],
 														(Boolean) conclusion[2]);
@@ -237,12 +234,12 @@ public class InferenceManager{
 					// or the Box
 					if ((Boolean) conclusion[3] == false) {
 						while (j < listOfFacts.size() ) {
-							j++;
 							if (listOfFacts.get(j).getPositionX() == firstBoxConcerned[0]
 									&& listOfFacts.get(j).getPositionY() == firstBoxConcerned[1]) {
 								listOfFacts.get(j).getListOfBoolean().set((int) conclusion[1], (Boolean) conclusion[2]);
 
 							}
+							j++;
 						}
 					}
 					// Boolean which indicate if the resulting Facts concerns the neighbouring Box
@@ -265,7 +262,7 @@ public class InferenceManager{
 										facts.getListOfBoolean().set((int) conclusion[1],
 												(Boolean) conclusion[2]);
 									} else {
-										if (facts.getPositionX() == firstBoxConcerned[0] - 1
+										if (facts.getPositionX() == firstBoxConcerned[0] 
 												&& facts.getPositionY() == firstBoxConcerned[1] + 1) {
 											facts.getListOfBoolean().set((int) conclusion[1],
 													(Boolean) conclusion[2]);

@@ -50,11 +50,11 @@ public class Facts {
 	// UPDATE FACTS 
 	
 	public void updateFacts( Boolean F_smell, Boolean F_wind, Boolean F_light, Boolean F_monster, Boolean F_riFt) {
-		listOFBoolean.set(7,F_smell);
-		listOFBoolean.set(6,F_wind);
+		listOFBoolean.set(3,F_smell);
+		listOFBoolean.set(4,F_wind);
 		listOFBoolean.set(5,F_light);
-		listOFBoolean.set(4,F_monster);
-		listOFBoolean.set(3,F_riFt);
+		listOFBoolean.set(6,F_monster);
+		listOFBoolean.set(7,F_riFt);
 	}
    
 }
